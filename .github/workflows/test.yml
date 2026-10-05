@@ -8,8 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name:Checkout Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Validate HTML
-        uses: echo "Running automated checks on the pull request code..."
+        run: echo "Running automated checks on the pull request code..."
