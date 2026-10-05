@@ -1,0 +1,35 @@
+name: CI/CD Web Deployment
+
+# Trigger: Run automatically on every push to the main branch
+on:
+  push:
+    branches: ["main"]
+
+# Grant workflow permissions to publish to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      # Step 1: Clone the repository code to the virtual runner
+      - name: Checkout Repository Code
+        uses: actions/checkout@v5
+
+      # Step 2: Configure Pages environment settings
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      # Step 3: Package site directory into a build artifact
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      # Step 4: Publish artifact live on the web
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
